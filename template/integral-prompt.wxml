@@ -1,0 +1,10 @@
+<template name="integral-prompt">
+  <view class="bg" wx:if="{{showIntegralPrompt}}"></view>
+  <view class="prompt-modal" wx:if="{{showIntegralPrompt}}">
+    <view class="prompt-text">{{promptText}}</view>
+    <view class="integral-btn-bg">
+    	<text class="prompt-btn-no-integral" bindtap="closePrompt">我不换</text>
+    </view>
+    <view class="prompt-btn" bindtap="closePrompt">{{btnText}}</view>
+  </view>
+</template>

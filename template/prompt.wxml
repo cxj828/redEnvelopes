@@ -1,0 +1,7 @@
+<template name="prompt">
+  <view class="bg" wx:if="{{showPrompt}}"></view>
+  <view class="prompt-modal" wx:if="{{showPrompt}}">
+    <view class="prompt-text">{{promptText}}</view>
+    <view class="prompt-btn" bindtap="closePrompt">{{btnText}}</view>
+  </view>
+</template>

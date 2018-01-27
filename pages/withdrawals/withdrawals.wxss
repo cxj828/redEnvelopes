@@ -1,0 +1,88 @@
+page{
+	background:#FFEBDE;
+}
+.container{
+	padding: 0;
+}
+.title{
+	display: block;
+	width: 750rpx;
+}
+.withdrawals-box{
+	background:#fff;
+	margin: 0 auto;
+	width: 620rpx;
+	margin-top:100rpx;
+	min-height: 300rpx;
+	padding: 100rpx 44rpx;
+}
+.box-text{
+	display: inline-block;
+	color: #141313;
+	font-size: 28rpx;
+	margin-bottom: 60rpx;
+	margin-right: 100rpx;
+}
+.box-money{
+	display: inline-block;
+	font-size: 48rpx;
+	color: #141313;
+	margin-bottom: 30rpx;
+}
+.box-input{
+	display: block;
+	border: 1px solid #DBC2C2;
+	height: 90rpx;
+	border-radius: 8rpx;
+	margin-top: 10rpx;
+}
+.box-input-title{
+	display: block;
+	color: #141313;
+	font-size: 28rpx;
+}
+.box-all{
+	display: block;
+	font-size: 28rpx;
+	color: #141313;
+	margin-top: 12rpx;
+}
+.box-submit-text{
+	margin-top: 20rpx;
+	font-size: 28rpx;
+}
+.box-submit{
+	background: #FFD485;
+	border-radius: 100px;
+	display: block;
+	height: 90rpx;
+	color: #702048;
+	text-align: center;
+	line-height: 90rpx;
+	margin-top: 60rpx;
+	font-size: 36rpx;
+	position: relative;
+}
+.text-small{
+	font-size: 24rpx;
+	position: absolute;
+}
+.text-blue{
+	color: #1F0000;
+}
+.disable{
+	background: #959595;
+	color: #FFFFFF;
+}
+
+ @import "../../wxss/common.wxss";
+
+
+
+
+
+
+
+
+
+

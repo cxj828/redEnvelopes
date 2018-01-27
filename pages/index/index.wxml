@@ -1,0 +1,19 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="send-prompt">
+    <text class="prompt-text">{{sendPrompt}}</text>
+  </view>
+  <view class="red-envelopes">
+    <form bindsubmit="buildEnvelopes">
+      <view class="title">密码红包</view>
+      <view class="envelopes-input input1" ><input placeholder="金额" type="digit" bindinput="bindInputMoney" value="{{money}}"/></view>
+      <view class="money-error"  wx:if="{{moneyerror.show}}">{{moneyerror.text}}</view>
+      <view class="envelopes-input"> <input placeholder="恭喜发财，猜中有奖" maxlength="20"/></view>
+      <button formType="submit" class="envelopes-btn"> 生成密码红包 </button>
+    </form>
+  </view>
+  <view class="bottom-btn">
+    <navigator class="go-btn" url="/pages/my-red-envelopes/my-red-envelopes">我的红包</navigator>
+    <navigator class="go-btn" url="/pages/withdrawals/withdrawals">余额提现</navigator>
+  </view>
+</view>

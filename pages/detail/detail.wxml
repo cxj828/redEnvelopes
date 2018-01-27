@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">猜中我我就和你嘿嘿嘿</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <rich-text class="user-motto">10元</rich-text>
+    <rich-text class="user-motto">密码：？？？</rich-text>
+  </view>
+  <view>
+    <text>竞猜小伙伴</text>
+    <scroll-view class="partner g-hidden-scrollbar" scroll-y="true">
+        <view wx:for="{{partnerArray}}" >
+          {{item.name}}
+        </view>
+        <text>24小时木有小伙伴猜中，金额自动退回</text>
+    </scroll-view>
+  </view>
+  <view class="invitation">
+    <button class="invitation-b" open-type='share'>邀请好友竞猜</button>
+  </view>
+</view>

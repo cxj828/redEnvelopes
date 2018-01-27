@@ -1,0 +1,54 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="tab">
+    <view class="tab-ls {{selecting==1? 'selecting' : ''}}">我发出的</view><view class="tab-ls {{selecting==2? 'selecting' : ''}}">我收到的</view>
+  </view>
+  <view class="my-box">
+      <view class="my-info-ls">
+         <text class="my-money-text">金额</text>
+         <text class="my-money">56.00</text>
+      </view>
+      <view class="my-info-ls" wx:if="{{userInfo.avatarUrl}}">
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </view>
+      <view class="my-info-ls">
+         <text class="my-num-text">数量</text>
+         <text class="my-num">7</text>
+      </view>
+  </view>
+  <view class="my-list">
+      <view class="personnel-ls">
+         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+         <view class="personnel">
+            <view class="personnel-name">就撒谎</view>
+            <view class="personnel-date">01-08</view>
+         </view>   
+         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
+      </view>
+      <view class="personnel-ls">
+         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+         <view class="personnel">
+            <view class="personnel-name">就撒谎</view>
+            <view class="personnel-date">01-08</view>
+         </view>   
+         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
+      </view>
+      <view class="personnel-ls">
+         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+         <view class="personnel">
+            <view class="personnel-name">就撒谎</view>
+            <view class="personnel-date">01-08</view>
+         </view>   
+         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
+      </view>
+      <view class="personnel-ls">
+         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+         <view class="personnel">
+            <view class="personnel-name">就撒谎</view>
+            <view class="personnel-date">01-08</view>
+         </view>   
+         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
+      </view>
+  </view>
+</view>

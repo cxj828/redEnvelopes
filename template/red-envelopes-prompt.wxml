@@ -1,0 +1,13 @@
+<template name="red-envelopes-prompt">
+  <view class="bg" wx:if="{{redEnvelopesPrompt.show}}"></view>
+  <view class="envelopes-prompt-modal" wx:if="{{redEnvelopesPrompt.show}}">
+  	<view class="initiator">
+  		 <image bindtap="bindViewTap" class="envelopes-prompt-userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover" wx:if="{{!redEnvelopesPrompt.success}}"></image>
+  		 <text class="envelopes-prompt-userinfo-name" wx:if="{{!redEnvelopesPrompt.success}}">{{userInfo.nickName}}</text>
+  		 <text class="envelopes-prompt-bingo" wx:if="{{redEnvelopesPrompt.success}}">Bingo</text>
+  		 <text class="envelopes-prompt-text"  wx:if="{{!redEnvelopesPrompt.success}}">手慢了，密码已经被别人破解了</text>
+  		 <text class="envelopes-prompt-text" wx:if="{{redEnvelopesPrompt.success}}">恭喜您猜中密码获得红包全部金额</text>
+  	</view>
+  	<view class="envelopes-prompt-btn" bindtap="btnbind">看看大家的运气</view>
+  </view>
+</template>
