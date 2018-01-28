@@ -23,7 +23,11 @@ Page({
     pos : 1,
     inputT : 0,
     jitterN : 0,
-    pwdStatus:0
+    pwdStatus:0,
+    scrollTop : 0,
+    animationData : {},
+    initLength : 0,
+    initRecordList : []
   },
   //事件处理函数
   bindViewTap: function() {
@@ -76,7 +80,9 @@ Page({
     util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/redpacket-guess-record.post",recordData,function(res){
       if(res.data.respData && res.data.code === "SUCCESS"){
         that.setData({
-          recordList : res.data.respData
+          recordList : res.data.respData,
+          initLength : res.data.respData.length || 0,
+          initRecordList : res.data.respData
         })
       }
     });
@@ -268,6 +274,28 @@ Page({
     wx.navigateTo({
       url:  "/pages/index/index"
     });
+  },
+  onShow: function(){
+    var that = this;
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: 'ease',
+    })
+    var num = -40;
+    var n = 0;
+    setInterval(function() {
+      n++
+      animation.translate(0,num).step()
+      that.setData({
+        animationData:animation.export()
+      })
+      if(n%3==0){
+        that.setData({
+          recordList : that.data.recordList.concat(that.data.recordList)
+        })      
+      }
+      num = num-40;
+    }.bind(this), 1000)
   }
 
 })

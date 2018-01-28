@@ -43,7 +43,7 @@
 	min-height: 550rpx;
 	background-size: 100%;
 	margin-top: 40rpx;
-	overflow-y: scroll;
+	overflow: hidden;
 }
 .in-list:first-child {
 	margin-top: 60rpx;
@@ -132,7 +132,9 @@
 	width: 624rpx;
 	top: 24rpx;
 }
-
+.scroll-to{
+	position: relative;
+}
 
  @import "../../wxss/common.wxss";
 

@@ -12,9 +12,11 @@
     <button class="sure" bindtap="checkNumber">{{btnText}}</button> 
   </view>
   <view class="participate-in-ls">
-    <view class="in-list" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item">
-    	<image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
-    	<text class="in-text">{{item.message}}</text>
+    <view class="scroll-to" animation="{{animationData}}">
+      <view class="in-list" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item">
+        <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
+        <text class="in-text">{{item.message}}</text>
+      </view>      
     </view>
   </view>
   <view class="bottom-info">
