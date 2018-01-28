@@ -1,12 +1,12 @@
 <!--index.wxml-->
 <view class="container">
   <view class="tab">
-    <view class="tab-ls {{selecting==1? 'selecting' : ''}}">我发出的</view><view class="tab-ls {{selecting==2? 'selecting' : ''}}">我收到的</view>
+    <view class="tab-ls {{selecting==1? 'selecting' : ''}}" bindtap="switchTab" data-type="1">我收到的</view><view class="tab-ls {{selecting==2? 'selecting' : ''}}" bindtap="switchTab" data-type="2">我发出的</view>
   </view>
   <view class="my-box">
       <view class="my-info-ls">
          <text class="my-money-text">金额</text>
-         <text class="my-money">56.00</text>
+         <text class="my-money">{{allMoney/100}}</text>
       </view>
       <view class="my-info-ls" wx:if="{{userInfo.avatarUrl}}">
         <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -14,41 +14,21 @@
       </view>
       <view class="my-info-ls">
          <text class="my-num-text">数量</text>
-         <text class="my-num">7</text>
+         <text class="my-num">{{allSize || '0'}}</text>
       </view>
   </view>
-  <view class="my-list">
-      <view class="personnel-ls">
-         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+  <scroll-view scroll-y="true" style="height: 200px;" bindscrolltolower="lower" class="my-list">
+      <view class="personnel-ls" wx:for="{{list}}" wx:for-index="idx" wx:for-item="item" wx:if="{{list&&list.length}}" bindtap="goDetail" data-id="{{item.id}}" data-status="{{item.status}}">
+         <image wx:if="{{selecting==1}}" bindtap="bindViewTap" class="personnel-photo" src="{{item.avatarUrl}}" background-size="cover"></image>
          <view class="personnel">
-            <view class="personnel-name">就撒谎</view>
-            <view class="personnel-date">01-08</view>
+            <view class="personnel-name" wx:if="{{selecting==1}}">{{item.createUserNickName}}</view>
+            <view class="personnel-name" wx:if="{{selecting==2}}">密码包</view>
+            <view class="personnel-date">{{item.gmtCreateTime}}</view>
          </view>   
-         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
+         <view class="personnel-money">{{item.status==1?'竞猜中' : item.status==2?'已被猜中' : '已退回'}}<text class="money-margin">¥{{item.money/100}}元</text></view>
       </view>
-      <view class="personnel-ls">
-         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-         <view class="personnel">
-            <view class="personnel-name">就撒谎</view>
-            <view class="personnel-date">01-08</view>
-         </view>   
-         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
+      <view wx:if="{{!list || !list.length}}">
+          暂无数据
       </view>
-      <view class="personnel-ls">
-         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-         <view class="personnel">
-            <view class="personnel-name">就撒谎</view>
-            <view class="personnel-date">01-08</view>
-         </view>   
-         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
-      </view>
-      <view class="personnel-ls">
-         <image bindtap="bindViewTap" class="personnel-photo" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-         <view class="personnel">
-            <view class="personnel-name">就撒谎</view>
-            <view class="personnel-date">01-08</view>
-         </view>   
-         <view class="personnel-money">猜中<text class="money-margin">¥28元</text></view>
-      </view>
-  </view>
+  </scroll-view>
 </view>

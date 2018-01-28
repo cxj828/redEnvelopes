@@ -7,18 +7,24 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    // 登录
-    util.commonUTIL.weiXinUserOpenIdFun();
-    // 获取用户信息
     util.commonUTIL.getPromission();
-    // /weixin/api/user/create-info.post
-    util.commonUTIL.netWorkRequestJsonFun(that.globalData.serviceServer + "/weixin/api/user/create-info.post",{wxOpenId : "",wxUnionId : "",nickName : "",avatarUrl : "",gender : ""},function(){
-
+    // 登录
+    util.commonUTIL.weiXinUserOpenIdFun(function(){
+      var user = wx.getStorageSync('user');
+      var userInfo = wx.getStorageSync('userInfo');
+      console.log(userInfo);
+      var data = {wxOpenId :user.openid,wxUnionId : "",nickName :userInfo.nickName,avatarUrl : userInfo.avatarUrl,gender : userInfo.gender};
+      util.commonUTIL.netWorkRequestJsonFun(that.globalData.serviceServer + "/weixin/api/user/create-info.post",data,function(res){
+        if(res.data.respData){
+          wx.setStorageSync('xcxUser',res.data.respData);
+        }
+      });      
     });
+    // /weixin/api/user/create-info.post
+
   },
   globalData: {
-    userInfo: util.commonUTIL.getPromission(),
+    userInfo: {},
     serviceServer:"https://xcx.fuzyme.com"
   }
 })

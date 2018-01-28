@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var util=require('../../utils/utils.js');
 const app = getApp()
 
 Page({
@@ -23,12 +24,15 @@ Page({
     })
   },
   onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    }
+    var that = this;
+
+    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/user/user-info.post",{currUserId:wx.getStorageSync('xcxUser').id},function(res){
+      if(res.data.respData && res.data.code === "SUCCESS"){
+        that.setData({
+          allBalance:res.data.respData.money/100
+        });
+      }
+    });
   },
   buildEnvelopes: function(e){
     var that = this;
@@ -40,6 +44,9 @@ Page({
   oninput: function(e){
     var that = this;
     that.data.inputval = e.detail.value;
+    if(!+that.data.allBalance){
+      return;
+    }
     if(parseFloat(that.data.inputval) > parseFloat(that.data.allBalance)){
       that.setData({
         "showerror":true,
@@ -63,9 +70,21 @@ Page({
     if(that.data.isdisable){
       return;
     }
-    that.setData({
-      "showPrompt":true
-    });  
+    var xcxUser = wx.getStorageSync('xcxUser');
+    var data = {
+      currUserId : xcxUser.id,
+      cashMoney : that.data.inputval*100
+    }
+    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/user/apply-cash.post",data,function(res){
+      if(res.data.respData && res.data.code === "SUCCESS"){
+          that.setData({
+            showPrompt:true,
+            promptText : res.data.respData.message
+          });          
+        
+      }
+    });
+
   },
   closePrompt:function(){
     this.setData({

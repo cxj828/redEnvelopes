@@ -20,6 +20,7 @@
 	border-radius: 4px;
 	margin-top: 100rpx;
 	text-align: center;
+	position: relative;
 }
 .detail-surplus{
 	font-size: 14px;

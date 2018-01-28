@@ -1,10 +1,11 @@
 <template name="integral-prompt">
   <view class="bg" wx:if="{{showIntegralPrompt}}"></view>
   <view class="prompt-modal" wx:if="{{showIntegralPrompt}}">
-    <view class="prompt-text">{{promptText}}</view>
+    <view class="prompt-text">{{!integral? "当前积分不足，成功发出1个密码包，可获得1积分": promptText}}</view>
     <view class="integral-btn-bg">
-    	<text class="prompt-btn-no-integral" bindtap="closePrompt">我不换</text>
+    	<text class="prompt-btn-no-integral" bindtap="closePrompt">{{!integral? '知道了' : '我不换'}}</text>
     </view>
-    <view class="prompt-btn" bindtap="closePrompt">{{btnText}}</view>
+    <view class="prompt-btn" bindtap="doExchange" wx:if="{{integral}}">{{chanceBtnText}}</view>
+    <view class="prompt-btn" bindtap="goIndex" wx:if="{{!integral}}">去发包</view> 
   </view>
 </template>

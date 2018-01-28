@@ -1,47 +1,15 @@
 <view class="container">
   <view class="package-detail">
-      <image bindtap="" class="package-user-img" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="package-user-name">{{userInfo.nickName}}</text>
-      <text class="package-text">猜中我我就和你嘿嘿嘿</text>
-      <text class="package-money">10.00元</text>
-      <text class="package-password">密码 ：35</text>
+      <image bindtap="" class="package-user-img" src="{{packageDetail.avatarUrl}}" ></image>
+      <text class="package-user-name">{{packageDetail.nickName}}</text>
+      <text class="package-text">{{packageDetail.remark}}</text>
+      <text class="package-money">{{packageDetail.money/100}}元</text>
+      <text class="package-password">密码 ：{{packageDetail.pwd}}</text>
   </view>
   <view class="participate-in-ls">
-    <view class="in-list">
-    	<image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-    	<text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-    	<image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-    	<text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-    	<image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-    	<text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-      <image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-      <image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-      <image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-      <image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-      <image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
-    </view>
-    <view class="in-list">
-      <image bindtap="" class="in-avatar" src="{{userInfo.avatarUrl}}" ></image>
-      <text class="in-text">姜昊的竞猜了数字14，没有猜中</text>
+    <view class="in-list" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item">
+      <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
+      <text class="in-text">{{item.message}}</text>
     </view>
   </view>
   <button class="share-btn" bindtap="shareFriend" open-type="share">邀请好友来竞猜</button>

@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var util=require('../../utils/utils.js');
 const app = getApp()
 
 Page({
@@ -9,7 +10,10 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     money : "",
-    moneyerror:{text:"金额不可小于1.00元",show:false}
+    moneyerror:{text:"金额不可小于1.00元",show:false},
+    envelopesDescribe : "",
+    creatBtnText : "生成密码包",
+    balanceText : ""
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,21 +22,24 @@ Page({
     })
   },
   onLoad: function () {
+    var that = this;
+    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/user/user-info.post",{currUserId:wx.getStorageSync('xcxUser').id},function(res){
+      if(res.data.respData && res.data.code === "SUCCESS"){
+        that.setData({
+          userInfo: res.data.respData,
+          hasUserInfo: true
+        })
+      }
+      console.log(JSON.stringify(res.data));
 
-
-
-    
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    }
+    });
     
   },
   buildEnvelopes: function(e){
     var that = this;
-    
+    var user = wx.getStorageSync('user');
+    var userInfo = wx.getStorageSync('userInfo');
+    var xcxUser = wx.getStorageSync('xcxUser');
     if(that.data.money<1){
       that.setData({
         money: "",
@@ -40,20 +47,49 @@ Page({
       }) 
       return;
     }
-    wx.requestPayment({
-       'timeStamp': '',
-       'nonceStr': '',
-       'package': '',
-       'signType': 'MD5',
-       'paySign': '',
-       'success':function(res){
-       },
-       'fail':function(res){
-       }
-    })
-    wx.navigateTo({
-      url: '/pages/password-package/password-package'
-    });  
+    var data = {
+      "userId":xcxUser.id,
+      "money" : that.data.money*100
+    };
+    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/pay/unifiedorder.post",data,function(res){
+      if(res.data.respData && res.data.code === "SUCCESS"){
+        var unifiedorderId = res.data.respData.unifiedorderId;
+        if(!+res.data.respData.status){
+            util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，猜中有奖",unifiedOrderId:unifiedorderId},function(res){
+              if(res.data.respData && res.data.code === "SUCCESS"){
+                wx.navigateTo({
+                  url: '/pages/password-package/password-package?id='+res.data.respData.id
+                });  
+              }
+            });
+        }else{
+          var payData = res.data.respData.unifiedorderReqData;
+          wx.requestPayment({
+             'timeStamp': payData.timeStamp+"",
+             'nonceStr': payData.nonceStr,
+             'package': payData.packageStr,
+             'signType': payData.signType,
+             'paySign': payData.paySign,
+             'success':function(res){
+                util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，猜中有奖",unifiedOrderId:unifiedorderId},function(res){
+                  if(res.data.respData && res.data.code === "SUCCESS"){
+                    wx.navigateTo({
+                      url: '/pages/password-package/password-package?id='+res.data.respData.id
+                    });  
+                  }
+                });
+             },
+             'fail':function(res){
+
+             }
+          })
+        }
+      }
+    });
+
+    // wx.navigateTo({
+    //   url: '/pages/password-package/password-package'
+    // });  
   },
   bindInputMoney : function(e){
       var that = this;
@@ -65,7 +101,31 @@ Page({
           that.setData({
             money: e.detail.value.substring(0,spotIndex+3)
           })
+          return;
         }
       }
+      that.setData({
+        money: e.detail.value
+      }) 
+      if(+that.data.money>that.data.userInfo.money/100){
+        console.log(that.data.money);
+        console.log((that.data.money-(that.data.userInfo.money/100)));
+        that.setData({
+          creatBtnText: "还需支付"+that.toFixed((that.data.money-(that.data.userInfo.money/100)),2)+"元",
+          balanceText : "优先使用余额抵扣¥"+that.toFixed((that.data.userInfo.money/100),2)
+        }) 
+      }else{
+        that.setData({
+          creatBtnText: "还需支付0元",
+          balanceText : "优先使用余额抵扣¥"+that.toFixed(that.data.money,2)
+        })   
+      }
+  },
+  // toFixed 修复
+  toFixed:function (num, s) {
+      var times = Math.pow(10, s)
+      var des = num * times + 0.5
+      des = parseInt(des, 10) / times
+      return des + ''
   }
 })

@@ -1,5 +1,5 @@
 
-var loginStatus = false;
+var loginStatus = true;
 
 function formatTime(date) {
   var year = date.getFullYear()
@@ -65,7 +65,7 @@ var commonUTIL = commonUTIL || {
           console.log('查询成功...')
          // wx.showToast({ title: '查询成功', icon: 'loading', duration: 300, mask: true });
         }else{
-          wx.showToast({ title: respData.data.message, icon: 'loading', duration: 300, mask: true });
+          // wx.showToast({ title: respData.data.message, icon: 'loading', duration: 300, mask: true });
         }
       },
       success: function (respData) {
@@ -103,6 +103,7 @@ var commonUTIL = commonUTIL || {
                 console.log(JSON.stringify(res));
                 wx.setStorageSync('user', obj);//存储openid
                 console.log(js_code + '---------------save user openid-------------' + JSON.stringify(obj))
+                callBackFun && callBackFun();
               }
             });
           } else {
