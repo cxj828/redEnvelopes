@@ -123,7 +123,7 @@ var commonUTIL = commonUTIL || {
         if (res.data.respData) {
           wx.setStorageSync('xcxUser', res.data.respData);
           if (typeof successFun == 'function') {
-            successFun(res.data.respData);
+            successFun(res);
           }
         } else {
           console.error(JSON.stringify(res));
