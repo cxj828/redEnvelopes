@@ -77,6 +77,10 @@ var commonUTIL = commonUTIL || {
     });
   },
 
+
+  /***
+   * 公共方法获取当前微信对应的服务器用户信息
+   */
   getXcxUserInfo:function(successFun, errorFun){
     var userInfoURL = serviceServer + "/weixin/api/user/user-info.post";
     var xcxUserInfo = wx.getStorageSync('xcxUser') || {};
