@@ -1,5 +1,6 @@
 
 var loginStatus = true;
+var serviceServer = "https://xcx.fuzyme.com"
 
 function formatTime(date) {
   var year = date.getFullYear()
@@ -75,6 +76,62 @@ var commonUTIL = commonUTIL || {
       }
     });
   },
+
+  getXcxUserInfo:function(successFun, errorFun){
+    var userInfoURL = serviceServer + "/weixin/api/user/user-info.post";
+    var xcxUserInfo = wx.getStorageSync('xcxUser') || {};
+    console.log("------------xcxUserInfo-------------------")
+    console.log(JSON.stringify(xcxUserInfo))
+    console.log("------------xcxUserInfo-------------------")
+    if ((!xcxUserInfo.id)) {
+      commonUTIL.createXcxUserInfoFun(successFun, errorFun);
+    }else{
+      commonUTIL.netWorkRequestJsonFun(userInfoURL, { 'currUserId': xcxUserInfo.id}, function (res) {
+        if (res.data.respData) {
+          wx.setStorageSync('xcxUser', res.data.respData);
+          if (typeof successFun == 'function') {
+            successFun(res);
+          }
+        } else {
+          console.error(JSON.stringify(res));
+          if (typeof errorFun == 'function') {
+            errorFun(res);
+          }
+        }
+      });
+    }
+  },
+
+  createXcxUserInfoFun: function (successFun, errorFun){
+    var creatURL = serviceServer + "/weixin/api/user/create-info.post";
+    commonUTIL.weiXinUserOpenIdFun(function () {
+      var user = wx.getStorageSync('user');
+      var userInfo = wx.getStorageSync('userInfo');
+      console.log(userInfo);
+      var data = {
+        'wxOpenId': user.openid,
+        'wxUnionId': "",
+        'nickName': userInfo.nickName,
+        'avatarUrl': userInfo.avatarUrl,
+        'gender': userInfo.gender
+      };
+      commonUTIL.netWorkRequestJsonFun(creatURL, data, function (res) {
+        if (res.data.respData) {
+          wx.setStorageSync('xcxUser', res.data.respData);
+          if (typeof successFun == 'function') {
+            successFun(res.data.respData);
+          }
+        } else {
+          console.error(JSON.stringify(res));
+          if (typeof errorFun == 'function') {
+            errorFun(res);
+          }
+        }
+      });
+    });
+  },
+
+
 
   weiXinUserOpenIdFun: function (callBackFun) {
     
