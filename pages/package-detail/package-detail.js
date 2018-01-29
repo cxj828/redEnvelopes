@@ -27,7 +27,14 @@ Page({
     scrollTop : 0,
     animationData : {},
     initLength : 0,
-    initRecordList : []
+    initRecordList : [],
+    indicatorDots: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    loopTimes:[1,2],
+    autoplay: true,
+    interval: 3000,
+    duration: 1000,
+    recordResult:[]
   },
   //事件处理函数
   bindViewTap: function() {
@@ -68,12 +75,17 @@ Page({
              }
           })   
         }
+          that.setData({
+              smallNum: res.data.respData.pwdMinRegion,
+              bigNum : res.data.respData.pwdMaxRegion
 
+          })   
+         
         
       }
     });
     var recordData = {
-      includeSelf:false,
+      includeSelf:true,
       currUserId:wx.getStorageSync('xcxUser').id,
       redPacketId:options.id
     }
@@ -83,6 +95,20 @@ Page({
           recordList : res.data.respData,
           initLength : res.data.respData.length || 0,
           initRecordList : res.data.respData
+        })
+        var recordResult = [];
+        var num = 0;
+        for (var i = 0; i < that.data.recordList.length; i+=3) {
+            recordResult.push(that.data.recordList.slice(i,i+3));
+            // 最后一条不足3
+            if(recordResult[num].length<3){
+              var n = 3-recordResult[num].length;
+              recordResult[num] = recordResult[num].concat(that.data.recordList.slice(0,n));
+            }
+            num++;
+        }
+        that.setData({
+          recordResult:recordResult
         })
       }
     });
@@ -276,26 +302,52 @@ Page({
     });
   },
   onShow: function(){
-    var that = this;
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: 'ease',
+    // var that = this;
+    // var animation = wx.createAnimation({
+    //   duration: 1000,
+    //   timingFunction: 'ease',
+    // })
+    // var num = -40;
+    // var n = 0;
+    // setInterval(function() {
+    //   n++
+    //   animation.translate(0,num).step()
+    //   that.setData({
+    //     animationData:animation.export()
+    //   })
+    //   if(n%3==0){
+    //     that.setData({
+    //       recordList : that.data.recordList.concat(that.data.recordList)
+    //     })      
+    //   }
+    //   num = num-40;
+    // }.bind(this), 1000)
+
+//     wx.createSelectorQuery().selectAll('.animationList').boundingClientRect(function(rects){
+//       rects.forEach(function(rect){
+// console.log(rect)
+//       })
+//     }).exec()
+  },
+  changeIndicatorDots: function (e) {
+    this.setData({
+      indicatorDots: !this.data.indicatorDots
     })
-    var num = -40;
-    var n = 0;
-    setInterval(function() {
-      n++
-      animation.translate(0,num).step()
-      that.setData({
-        animationData:animation.export()
-      })
-      if(n%3==0){
-        that.setData({
-          recordList : that.data.recordList.concat(that.data.recordList)
-        })      
-      }
-      num = num-40;
-    }.bind(this), 1000)
+  },
+  changeAutoplay: function (e) {
+    this.setData({
+      autoplay: !this.data.autoplay
+    })
+  },
+  intervalChange: function (e) {
+    this.setData({
+      interval: e.detail.value
+    })
+  },
+  durationChange: function (e) {
+    this.setData({
+      duration: e.detail.value
+    })
   }
 
 })

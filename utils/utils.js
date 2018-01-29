@@ -111,6 +111,8 @@ var commonUTIL = commonUTIL || {
           }
         }
       });
+    }else{
+      callBackFun && callBackFun();
     }
   },
   

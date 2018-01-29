@@ -11,14 +11,27 @@
   <view class="button">
     <button class="sure" bindtap="checkNumber">{{btnText}}</button> 
   </view>
-  <view class="participate-in-ls">
-    <view class="scroll-to" animation="{{animationData}}">
-      <view class="in-list" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item">
+<!--   <view class="participate-in-ls">
+      <view class="in-list animationList" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item" animation="{{animationData[index]}}">{{animationData[index]}}
         <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
         <text class="in-text">{{item.message}}</text>
       </view>      
-    </view>
-  </view>
+  </view> -->
+<view class="participate-in-ls">
+  <swiper indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="true" current="0" circular="true" class="participate-swiper">
+    <block wx:for="{{recordResult}}" wx:for-item="list">
+      <swiper-item key="ss">
+          <block wx:for="{{list}}" wx:for-item="item">
+            <view class="in-list">
+                <image class="in-avatar" src="{{item.avatarUrl}}"></image>
+                <text class="in-text">{{item.message}}</text>
+            </view>
+          </block>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
   <view class="bottom-info">
   	<view class="integral-title">获得额外竞猜机会（以下2种可叠加）我的积分：{{integral}}</view>
   	<view class="invitation">

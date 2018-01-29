@@ -87,6 +87,10 @@ Page({
           if(callback){
             that.data.list = [];
           }
+          
+          for (var i = 0; i <res.data.respData.length; i++) {
+            res.data.respData[i].gmtCreateTime = that.timestampToTime(res.data.respData[i].gmtCreateTime);
+          }
           that.setData({
             list : that.data.list.concat(res.data.respData),
             hasMore : res.data.hasMore,
@@ -131,8 +135,8 @@ Page({
   },
   timestampToTime : function (timestamp) {
           var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-          M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-          D = date.getDate() + ' ';
+          var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+          var D = date.getDate() + ' ';
           return M+D;
   }
 })
