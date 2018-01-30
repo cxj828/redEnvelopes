@@ -31,7 +31,7 @@ page{
 }
 .box-input{
 	display: block;
-	border: 1px solid #DBC2C2;
+	border: 2rpx solid #DBC2C2;
 	height: 90rpx;
 	border-radius: 8rpx;
 	margin-top: 10rpx;
@@ -52,8 +52,7 @@ page{
 	font-size: 28rpx;
 }
 .box-submit{
-	background: #FFD485;
-	border-radius: 100px;
+	border-radius: 100rpx;
 	display: block;
 	height: 90rpx;
 	color: #702048;
@@ -62,17 +61,22 @@ page{
 	margin-top: 60rpx;
 	font-size: 36rpx;
 	position: relative;
+	background: #FFD485;
+	opacity: 1;
 }
 .text-small{
 	font-size: 24rpx;
 	position: absolute;
 }
 .text-blue{
-	color: #1F0000;
+	color: #4990E2;
+	font-size: 28rpx;
 }
 .disable{
-	background: #959595;
-	color: #FFFFFF;
+	opacity: 0.5;
+	background: #FFD485;
+	font-size: 36rpx;
+	color: #702048;
 }
 
  @import "../../wxss/common.wxss";

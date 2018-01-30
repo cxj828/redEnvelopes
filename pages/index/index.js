@@ -40,6 +40,9 @@ Page({
     var user = wx.getStorageSync('user');
     var userInfo = wx.getStorageSync('userInfo');
     var xcxUser = wx.getStorageSync('xcxUser');
+    if(!+that.data.money){
+      return;
+    }
     if(that.data.money<1){
       that.setData({
         money: "",
@@ -51,6 +54,7 @@ Page({
       "userId":xcxUser.id,
       "money" : that.data.money*100
     };
+    console.log(that.data.envelopesDescribe);
     util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/pay/unifiedorder.post",data,function(res){
       if(res.data.respData && res.data.code === "SUCCESS"){
         var unifiedorderId = res.data.respData.unifiedorderId;
@@ -93,6 +97,16 @@ Page({
   },
   bindInputMoney : function(e){
       var that = this;
+      if(e.detail.value && +e.detail.value<1){
+        that.setData({
+          moneyerror : {show:true,text:"金额不可小于1.00元"}
+        }) 
+        return;
+      }else{
+        that.setData({
+          moneyerror : {show:false,text:"金额不可小于1.00元"}
+        })      
+      }
       var spotIndex = e.detail.value.indexOf(".");
       if(+spotIndex!==-1){
         var spotAfterLen = e.detail.value.substring(spotIndex+1).length;
@@ -127,5 +141,10 @@ Page({
       var des = num * times + 0.5
       des = parseInt(des, 10) / times
       return des + ''
+  },
+  bindEnvelopesDescInput : function(e){
+        this.setData({
+          envelopesDescribe : e.detail.value
+        })     
   }
 })

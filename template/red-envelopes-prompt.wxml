@@ -8,6 +8,9 @@
   		 <text class="envelopes-prompt-text"  wx:if="{{!redEnvelopesPrompt.success}}">手慢了，密码已经被别人破解了</text>
   		 <text class="envelopes-prompt-text" wx:if="{{redEnvelopesPrompt.success}}">恭喜您猜中密码获得红包全部金额</text>
   	</view>
-  	<view class="envelopes-prompt-btn" bindtap="btnbind">看看大家的运气</view>
+    <view wx:if="{{redEnvelopesPrompt.success}}">
+      <image class="kai" src="/imgs/kai.png" background-size="cover" bindtap="btnbind"></image>
+    </view>
+  	<view class="envelopes-prompt-btn" bindtap="btnbind" wx:if="{{!redEnvelopesPrompt.success}}">看看大家的运气</view>
   </view>
 </template>

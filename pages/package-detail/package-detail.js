@@ -34,7 +34,8 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 1000,
-    recordResult:[]
+    recordResult:[],
+    useCheckPwd : ""
   },
   //事件处理函数
   bindViewTap: function() {
@@ -85,7 +86,7 @@ Page({
       }
     });
     var recordData = {
-      includeSelf:true,
+      includeSelf:false,
       currUserId:wx.getStorageSync('xcxUser').id,
       redPacketId:options.id
     }
@@ -142,11 +143,11 @@ Page({
     if(that.data.btnText == "再猜一次"){
           if(!+that.data.pwdStatus){
             that.setData({
-               smallNum:that.data.password
+               smallNum:that.data.useCheckPwd
             })  
           }else{
             that.setData({
-               bigNum:that.data.password
+               bigNum:that.data.useCheckPwd
             })     
           }
           that.setData({
@@ -179,7 +180,8 @@ Page({
       if(res.data.respData && res.data.code === "SUCCESS"){
         if(!+res.data.respData.guessSuccess){
             that.setData({
-               pwdStatus:res.data.respData.pwdStatus
+               pwdStatus:res.data.respData.pwdStatus,
+               useCheckPwd : that.data.password
             })  
           that.setData({
             reason: res.data.respData.message,
@@ -348,6 +350,14 @@ Page({
     this.setData({
       duration: e.detail.value
     })
+  },
+  onShareAppMessage: function () {
+    var that = this;
+    return {
+      title: "比一比谁的手速最快",
+      path: '/pages/password-package/password-package?id='+that.data.redPacketId,
+      imageUrl:"/imgs/kai.png"
+    }
   }
 
 })

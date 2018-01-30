@@ -47,6 +47,12 @@ Page({
     if(!+that.data.allBalance){
       return;
     }
+    if(!+that.data.inputval){
+      that.setData({
+        "isdisable":true
+      });
+      return;
+    }
     if(parseFloat(that.data.inputval) > parseFloat(that.data.allBalance)){
       that.setData({
         "showerror":true,
@@ -64,6 +70,11 @@ Page({
     that.setData({
       "inputval":that.data.allBalance
     });
+    if(+that.data.inputval){
+      that.setData({
+        "isdisable":false
+      });    
+    }
   },
   submit: function(){
     var that = this;

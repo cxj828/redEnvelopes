@@ -7,7 +7,9 @@ Page({
   data: {
     userInfo:{},
     packageDetail:{},
-    recordList:[]
+    recordList:[],
+    shareBtnText : "再发一个",
+    xcxUser : wx.getStorageSync('xcxUser')
   },
   //事件处理函数
   bindViewTap: function() {
@@ -26,6 +28,9 @@ Page({
         that.setData({
           packageDetail:res.data.respData
         })
+        if(res.data.respData.createUserId != that.data.xcxUser.id){
+          shareBtnText = "我也发一个";
+        }
         
       }
     });
@@ -46,6 +51,11 @@ Page({
     wx.navigateTo({
       url: '/pages/package-detail/package-detail'
     });
+  },
+  goIndex : function(){
+     wx.navigateTo({
+      url: '/pages/index/index'
+    });   
   }
 
 })

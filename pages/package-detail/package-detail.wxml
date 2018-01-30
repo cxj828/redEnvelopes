@@ -5,7 +5,7 @@
   <view class="detail-prompt">密码范围提示</view>
   <view class="input-box">
   	<text class="reason">{{reason}}</text>
-    <input class="detail-input" type="number" name="" placeholder="请输入密码" value="{{password}}" bindinput="bindKeyInput" style="left: {{inputT}}" />
+    <input class="detail-input {{btnText=='再猜一次'? 'input-error' : ''}}" type="number" name="" placeholder="请输入密码" value="{{password}}" bindinput="bindKeyInput" style="left: {{inputT}}" disabled="{{btnText=='再猜一次'}}"/>
     <text class="detail-surplus">还剩{{chance}}次机会</text>
   </view>
   <view class="button">
@@ -18,6 +18,7 @@
       </view>      
   </view> -->
 <view class="participate-in-ls">
+  <view class="swiper-title">竞猜中的小伙伴</view>
   <swiper indicator-dots="{{indicatorDots}}"
     autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="true" current="0" circular="true" class="participate-swiper">
     <block wx:for="{{recordResult}}" wx:for-item="list">
@@ -33,7 +34,7 @@
   </swiper>
 </view>
   <view class="bottom-info">
-  	<view class="integral-title">获得额外竞猜机会（以下2种可叠加）我的积分：{{integral}}</view>
+  	<view class="integral-title">我的积分：{{integral}} <block class="help"></block></view>
   	<view class="invitation">
   		<text class="invitation-text">邀请你的好友一起竞猜</text>
   		<text class="text-use">（可增加一次机会）</text>
