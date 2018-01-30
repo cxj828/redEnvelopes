@@ -23,17 +23,15 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/user/user-info.post",{currUserId:wx.getStorageSync('xcxUser').id},function(res){
-      if(res.data.respData && res.data.code === "SUCCESS"){
-        that.setData({
-          userInfo: res.data.respData,
-          hasUserInfo: true
-        })
-      }
-      console.log(JSON.stringify(res.data));
-
-    });
-    
+    util.commonUTIL.getXcxUserInfo(function(res){
+      console.log('---xcxUserInfo---')
+      console.log(JSON.stringify(res.data.respData))
+      console.log('---xcxUserInfo---')
+      that.setData({
+        userInfo: res.data.respData,
+        hasUserInfo: true
+      });
+    })
   },
   buildEnvelopes: function(e){
     var that = this;
