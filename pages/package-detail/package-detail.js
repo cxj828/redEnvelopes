@@ -90,7 +90,9 @@ Page({
       currUserId:wx.getStorageSync('xcxUser').id,
       redPacketId:options.id
     }
-    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/redpacket-guess-record.post",recordData,function(res){
+    //查询参加抢红包的人的记录信息（一人一条）
+    var requestURL = app.globalData.serviceServer + "/weixin/api/redpacket/redpacket-guess-record.post";
+    util.commonUTIL.netWorkRequestJsonFun(requestURL ,recordData,function(res){
       if(res.data.respData && res.data.code === "SUCCESS"){
         that.setData({
           recordList : res.data.respData,

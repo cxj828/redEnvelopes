@@ -2,11 +2,9 @@
 //app.js
 App({
   onLaunch: function () {
+    console.log('-------' + util.constantUTIL.serviceServer)
     // 展示本地存储能力
     var that = this;
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
     util.commonUTIL.getPromission();
     // 登录
     util.commonUTIL.weiXinUserOpenIdFun(function(){
@@ -25,6 +23,7 @@ App({
   },
   globalData: {
     userInfo: {},
-    serviceServer:"https://xcx.fuzyme.com"
+    //serviceServer:"https://xcx.fuzyme.com",
+    serviceServer: util.constantUTIL.serviceServer,
   }
 })

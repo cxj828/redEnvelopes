@@ -1,6 +1,5 @@
 
 var loginStatus = true;
-var serviceServer = "https://xcx.fuzyme.com"
 
 function formatTime(date) {
   var year = date.getFullYear()
@@ -10,7 +9,6 @@ function formatTime(date) {
   var hour = date.getHours()
   var minute = date.getMinutes()
   var second = date.getSeconds()
-
 
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
@@ -43,10 +41,10 @@ function getUserAccTockenFun(){
 
 //常量
 var constantUTIL = constantUTIL || {
-  // myReqURL: 'http://ideal.51vip.biz',
   myReqURL: 'https://candy.candytour.club/',
   appid: 'wxcf203bd1b027ec98',
-  secret: '833fad84b887a50816ac2dfa152b7f4c'
+  secret: '833fad84b887a50816ac2dfa152b7f4c',
+  serviceServer : "http://127.0.0.1:8080"
 }
 
 
@@ -61,13 +59,14 @@ var commonUTIL = commonUTIL || {
         console.log('request url beforeSend.....')
       },
       complete: function (respData) {
-        //console.log('respData ..... ' + JSON.stringify(respData));
-        if (respData.data.resultCode == 100){
-          console.log('查询成功...')
-         // wx.showToast({ title: '查询成功', icon: 'loading', duration: 300, mask: true });
-        }else{
-          // wx.showToast({ title: respData.data.message, icon: 'loading', duration: 300, mask: true });
-        }
+        console.log('reqURL ..... ' + reqURL);
+        console.log('respData ..... ' + JSON.stringify(respData));
+        // if (respData.data.resultCode == 100){
+        //   console.log('查询成功...')
+        //  // wx.showToast({ title: '查询成功', icon: 'loading', duration: 300, mask: true });
+        // }else{
+        //   // wx.showToast({ title: respData.data.message, icon: 'loading', duration: 300, mask: true });
+        // }
       },
       success: function (respData) {
         if ( typeof callBackFun == 'function' ){
@@ -82,7 +81,7 @@ var commonUTIL = commonUTIL || {
    * 公共方法获取当前微信对应的服务器用户信息
    */
   getXcxUserInfo:function(successFun, errorFun){
-    var userInfoURL = serviceServer + "/weixin/api/user/user-info.post";
+    var userInfoURL = constantUTIL.serviceServer + "/weixin/api/user/user-info.post";
     var xcxUserInfo = wx.getStorageSync('xcxUser') || {};
     console.log("------------xcxUserInfo-------------------")
     console.log(JSON.stringify(xcxUserInfo))
@@ -107,7 +106,7 @@ var commonUTIL = commonUTIL || {
   },
 
   createXcxUserInfoFun: function (successFun, errorFun){
-    var creatURL = serviceServer + "/weixin/api/user/create-info.post";
+    var creatURL = commonUTIL.serviceServer + "/weixin/api/user/create-info.post";
     commonUTIL.weiXinUserOpenIdFun(function () {
       var user = wx.getStorageSync('user');
       var userInfo = wx.getStorageSync('userInfo');
