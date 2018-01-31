@@ -77,6 +77,13 @@ Page({
   },
   getListData:function(type,callback){
     var that = this;
+    if(!that.data.loading){
+        that.setData({
+            loading : true
+        });
+    }else{
+      return;
+    }
     var data = {
       currUserId : that.data.xcxUser.id,
       pageNum : that.data.pageNum,
@@ -106,6 +113,9 @@ Page({
       if(callback){
         callback(type+1);
       }
+        that.setData({
+            loading : false
+        });
     });
   },
   // 上拉加载更多

@@ -86,7 +86,7 @@ Page({
       }
     });
     var recordData = {
-      includeSelf:false,
+      includeSelf:true,
       currUserId:wx.getStorageSync('xcxUser').id,
       redPacketId:options.id
     }

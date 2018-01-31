@@ -7,12 +7,16 @@
     <form bindsubmit="buildEnvelopes">
       <view class="title">密码红包</view>
       <view class="envelopes-input input1" >
+        <text class="money-position">金额</text>
         <input placeholder="金额" type="digit" bindblur="bindInputMoney" value="{{money}}"/>
         <view class="money-error"  wx:if="{{moneyerror.show}}">{{moneyerror.text}}</view>
       </view>
-      <view class="envelopes-input"> <input bindinput="bindEnvelopesDescInput" placeholder="恭喜发财，猜中有奖" maxlength="20" value="{{envelopesDescribe}}"/></view>
+      <view class="envelopes-input"> 
+        <text class="desc-position">留言</text>
+        <input bindinput="bindEnvelopesDescInput" placeholder="恭喜发财，猜中有奖" maxlength="20" value="{{envelopesDescribe}}"/>
+      </view>
       
-      <button formType="submit" class="envelopes-btn "> <text class="{{moneyerror.show? 'disable' : ''}}">{{creatBtnText}}</text> <text class="money-error2"  wx:if="{{balanceText}}">{{balanceText}}</text></button>
+      <button formType="submit" class="envelopes-btn "> <text class="creat-btn {{balanceText? 'changetop' : ''}} {{moneyerror.show? 'disable' : ''}}">{{creatBtnText}}</text> <text class="money-error2"  wx:if="{{balanceText}}">{{balanceText}}</text></button>
       <view class="back">24小时没有被猜中，自动退回账户余额</view>
       <view class="five">平台会向猜中用户收取5%手续费</view>
     </form>

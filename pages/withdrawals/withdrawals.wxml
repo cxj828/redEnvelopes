@@ -2,11 +2,12 @@
 <view class="container">
     <view class="withdrawals-box">
         <view class="box-text">账户余额</view>
-        <view class="box-money">{{allBalance}}</view>
+        <view class="box-money">{{allBalance}} <text class="yuan">元</text></view>
         <view class="box-input-title">提现金额</view>
         <input placeholder="" class="box-input" type="digit" bindinput="oninput" bindconfirm="" bindfocus="" value="{{inputval}}"/>
         <view class="box-submit-text">提现到微信钱包，<text class="text-blue" bindtap="withdrawalsAll">全部提现</text></view>
-        <view bindtap="submit" class="box-submit {{isdisable ? 'disable':''}}"> 提现<text class="text-small">（一到三个工作日到账）</text> </view>
+        <view bindtap="submit" class="box-submit {{isdisable ? 'disable':''}}"> 提现</view>
+        <text class="small-text-submit">(一到三个工作日到账)</text>
     </view>
     <template is="prompt" data="{{promptText,btnText,showPrompt}}" /> 
 </view>

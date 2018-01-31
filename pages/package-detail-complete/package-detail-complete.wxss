@@ -56,6 +56,8 @@
 	margin: 0 auto;
 	margin-top: 150rpx;
 	border-radius: 50%;
+	border: 5rpx solid rgb(216,147,108);
+	box-shadow: 0 0 4rpx #590606;
 }
 .package-user-name,.package-text,.package-money,.package-password{
 	display: block;
