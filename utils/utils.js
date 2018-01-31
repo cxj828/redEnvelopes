@@ -44,7 +44,7 @@ var constantUTIL = constantUTIL || {
   myReqURL: 'https://candy.candytour.club/',
   appid: 'wxcf203bd1b027ec98',
   secret: '833fad84b887a50816ac2dfa152b7f4c',
-  serviceServer : "http://127.0.0.1:8080"
+  serviceServer: "https://xcx.fuzyme.com/"
 }
 
 
