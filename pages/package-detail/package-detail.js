@@ -96,23 +96,7 @@ Page({
     util.commonUTIL.netWorkRequestJsonFun(requestURL ,recordData,function(res){
       if(res.data.respData && res.data.code === "SUCCESS"){
         that.setData({
-          recordList : res.data.respData,
-          initLength : res.data.respData.length || 0,
-          initRecordList : res.data.respData
-        })
-        var recordResult = [];
-        var num = 0;
-        for (var i = 0; i < that.data.recordList.length; i+=3) {
-            recordResult.push(that.data.recordList.slice(i,i+3));
-            // 最后一条不足3
-            if(recordResult[num].length<3){
-              var n = 3-recordResult[num].length;
-              recordResult[num] = recordResult[num].concat(that.data.recordList.slice(0,n));
-            }
-            num++;
-        }
-        that.setData({
-          recordResult:recordResult
+          recordList : res.data.respData
         })
       }
     });
@@ -194,6 +178,7 @@ Page({
             jitterN : 0
           }) 
           that.shake_funct();
+          that.reloadRecord();
           // 猜中
         }else{
           that.setData({
@@ -229,6 +214,23 @@ Page({
     // if(that.data.password == that.data.relPassword){
 
     // }
+  },
+  reloadRecord : function(){
+    var that = this;
+    var recordData = {
+      includeSelf:true,
+      currUserId:wx.getStorageSync('xcxUser').id,
+      redPacketId:that.data.redPacketId
+    }
+    //查询参加抢红包的人的记录信息（一人一条）
+    var requestURL = app.globalData.serviceServer + "/weixin/api/redpacket/redpacket-guess-record.post";
+    util.commonUTIL.netWorkRequestJsonFun(requestURL ,recordData,function(res){
+      if(res.data.respData && res.data.code === "SUCCESS"){
+        that.setData({
+          recordList : res.data.respData
+        })
+      }
+    });
   },
   bindKeyInput:function(e){
       this.setData({

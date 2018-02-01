@@ -179,7 +179,7 @@
 .reason{
 	display: block;
 	position: absolute;
-	font-size: 18px;
+	font-size: 36rpx;
 	color: #FFFFFF;
 	text-align: center;
 	width: 624rpx;

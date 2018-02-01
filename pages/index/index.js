@@ -59,6 +59,7 @@ Page({
         if(!+res.data.respData.status){
             util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，猜中有奖",unifiedOrderId:unifiedorderId},function(res){
               if(res.data.respData && res.data.code === "SUCCESS"){
+                
                 wx.navigateTo({
                   url: '/pages/password-package/password-package?id='+res.data.respData.id
                 });  
@@ -93,19 +94,14 @@ Page({
     //   url: '/pages/password-package/password-package'
     // });  
   },
-  bindInputMoney : function(e){
+  bindblur : function(e){
       var that = this;
-      if(e.detail.value && +e.detail.value<1){
-        that.setData({
-          moneyerror : {show:true,text:"金额不可小于1.00元"}
-        }) 
-        return;
-      }else{
-        that.setData({
-          moneyerror : {show:false,text:"金额不可小于1.00元"}
-        })      
-      }
       var spotIndex = e.detail.value.indexOf(".");
+      if(e.detail.value.slice(0,1)=='.'){
+          that.setData({
+            money: "0"+e.detail.value
+          })       
+      }
       if(+spotIndex!==-1){
         var spotAfterLen = e.detail.value.substring(spotIndex+1).length;
         var overranging = e.detail.value.length
@@ -115,6 +111,16 @@ Page({
           })
           return;
         }
+      }
+      if(e.detail.value && +e.detail.value<1){
+        that.setData({
+          moneyerror : {show:true,text:"金额不可小于1.00元"}
+        }) 
+        return;
+      }else{
+        that.setData({
+          moneyerror : {show:false,text:"金额不可小于1.00元"}
+        })      
       }
       that.setData({
         money: e.detail.value
@@ -131,6 +137,26 @@ Page({
           creatBtnText: "还需支付0元",
           balanceText : "优先使用余额抵扣¥"+that.toFixed(that.data.money,2)
         })   
+      }
+  },
+  bindInputMoney : function(e){
+      var that = this;
+      var spotIndex = e.detail.value.indexOf(".");
+      if (e.detail.value.length-1 != spotIndex && e.detail.value.substring(e.detail.value.length-1) == '.') {
+          that.setData({
+            money: e.detail.value.substring(0,e.detail.value.length-1)
+          })
+        return;
+      }
+      if(+spotIndex!==-1){
+        var spotAfterLen = e.detail.value.substring(spotIndex+1).length;
+        var overranging = e.detail.value.length
+        if(+spotAfterLen>2){
+          that.setData({
+            money: e.detail.value.substring(0,spotIndex+3)
+          })
+          return;
+        }
       }
   },
   // toFixed 修复

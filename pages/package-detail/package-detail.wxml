@@ -14,7 +14,7 @@
   <view class="participate-in-ls">
       <view class="swiper-title">竞猜中的小伙伴</view>
       <view class="list-box">
-        <view class="in-list animationList" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item" animation="{{animationData[index]}}">{{animationData[index]}}
+        <view class="in-list animationList" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item" >
           <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
           <text class="in-text">{{item.message}}</text>
         </view>         
@@ -41,8 +41,8 @@
   <view class="bottom-info">
   	<view class="integral-title">我的积分：{{integral}} <block class="help"></block></view>
   	<view class="invitation">
-  		<text class="invitation-text">邀请你的好友一起竞猜</text>
-  		<text class="text-use">（可增加一次机会）</text>
+  		<text class="invitation-text">邀请你的好友</text>
+  		<text class="text-use">一起竞猜</text>
   		 <button class="share-btn" bindtap="" open-type="share">去邀请</button>
   	</view>
   	<view class="exchange">

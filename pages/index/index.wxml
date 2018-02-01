@@ -8,7 +8,7 @@
       <view class="title">密码红包</view>
       <view class="envelopes-input input1" >
         <text class="money-position">金额</text>
-        <input placeholder="金额" type="digit" bindblur="bindInputMoney" value="{{money}}"/>
+        <input placeholder="金额" type="digit" bindblur="bindblur" bindinput="bindInputMoney" value="{{money}}"/>
         <view class="money-error"  wx:if="{{moneyerror.show}}">{{moneyerror.text}}</view>
       </view>
       <view class="envelopes-input"> 
