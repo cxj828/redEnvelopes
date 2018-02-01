@@ -181,9 +181,16 @@ Page({
           that.reloadRecord();
           // 猜中
         }else{
-          that.setData({
-             redEnvelopesPrompt:{show:true,success:true}
-          })  
+          if(res.data.respData.guessSuccess == 1){
+            that.setData({
+               redEnvelopesPrompt:{show:true,success:true}
+            })  
+          }else{
+            that.setData({
+               redEnvelopesPrompt:{show:true,success:false}
+            })             
+          }
+
         }
         
       }
