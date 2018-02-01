@@ -35,7 +35,8 @@ Page({
     interval: 3000,
     duration: 1000,
     recordResult:[],
-    useCheckPwd : ""
+    useCheckPwd : "",
+    remark:""
   },
   //事件处理函数
   bindViewTap: function() {
@@ -78,8 +79,8 @@ Page({
         }
           that.setData({
               smallNum: res.data.respData.pwdMinRegion,
-              bigNum : res.data.respData.pwdMaxRegion
-
+              bigNum : res.data.respData.pwdMaxRegion,
+              remark : res.data.respData.remark
           })   
          
         
@@ -162,7 +163,7 @@ Page({
 
     if(!+that.data.chance){
         that.setData({
-          reason: "红包次数用完了"
+          reason: "竞猜机会已用完，可使用积分兑换"
         })
       return;
     }
@@ -358,7 +359,7 @@ Page({
   onShareAppMessage: function () {
     var that = this;
     return {
-      title: "比一比谁的手速最快",
+      title: that.data.remark,
       path: '/pages/password-package/password-package?id='+that.data.redPacketId,
       imageUrl:"/imgs/kai.png"
     }
