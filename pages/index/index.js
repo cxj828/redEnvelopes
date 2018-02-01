@@ -21,7 +21,7 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onShow:function(){
     var that = this;
     util.commonUTIL.getXcxUserInfo(function(res){
       console.log('---xcxUserInfo---')
@@ -31,8 +31,16 @@ Page({
         userInfo: res.data.respData,
         hasUserInfo: true
       });
-    })
+    })  
+    that.setData({
+      money: "",
+      moneyerror : {show:false,text:"金额不可小于1.00元"},
+      envelopesDescribe : "",
+      creatBtnText : "生成密码包",
+      balanceText : ""
+    }) 
   },
+  onLoad: function () {},
   buildEnvelopes: function(e){
     var that = this;
     var user = wx.getStorageSync('user');
