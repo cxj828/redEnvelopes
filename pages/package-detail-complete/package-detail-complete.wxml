@@ -4,8 +4,10 @@
       <text class="package-user-name">{{packageDetail.createUserNickName}}</text>
       <text class="package-text">{{packageDetail.remark}}</text>
       <text class="package-money">{{packageDetail.money/100}}<text class="yuan">元</text></text>
-      <text class="package-password" wx:if="{{packageDetail.status == 2}}">密码 ：{{packageDetail.pwd}}</text>
+      <text class="package-password" wx:if="{{packageDetail.status == 2 && packageDetail.guessSuccessUser!=1}}">密码 ：{{packageDetail.pwd}}</text>
       <text class="package-overdue" wx:if="{{packageDetail.status == 3}}">密码包24小时未被猜中，金额已退回账户，可直接提现</text>
+      <text class="my-self-money" wx:if="{{packageDetail.guessSuccessUser==1}}">扣除¥1.00手续费</text>
+      <text class="my-self-text" wx:if="{{packageDetail.guessSuccessUser==1}}">已放入零钱 ，可直接发起提现</text>
   </view>
   <view class="participate-in-ls">
   <view class="swiper-title">竞猜中的小伙伴</view>

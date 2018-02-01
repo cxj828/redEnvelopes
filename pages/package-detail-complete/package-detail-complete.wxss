@@ -129,8 +129,17 @@
 }
 
 
-
-
+.my-self-money{
+	font-size: 26rpx;
+	color: #930500;
+	display: block;
+}
+.my-self-text{
+	font-size: 14px;
+	color: #FFDAD8;
+	display: block;
+	margin-top: 8rpx;
+}
 
 
 
