@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="tab">
-    <view class="tab-ls {{selecting==1? 'selecting' : ''}}" bindtap="switchTab" data-type="1">我收到的</view><view class="tab-ls {{selecting==2? 'selecting' : ''}}" bindtap="switchTab" data-type="2">我发出的</view>
+    <view class="tab-ls {{selecting==1? 'selecting' : ''}}" bindtap="switchTab" data-type="1">我猜中的</view><view class="tab-ls {{selecting==2? 'selecting' : ''}}" bindtap="switchTab" data-type="2">我发出的</view>
   </view>
   <view class="my-box">
       <view class="my-info-ls">

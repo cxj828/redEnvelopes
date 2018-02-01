@@ -11,13 +11,17 @@
   <view class="button">
     <button class="sure" bindtap="checkNumber">{{btnText}}</button> 
   </view>
-<!--   <view class="participate-in-ls">
-      <view class="in-list animationList" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item" animation="{{animationData[index]}}">{{animationData[index]}}
-        <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
-        <text class="in-text">{{item.message}}</text>
-      </view>      
-  </view> -->
-<view class="participate-in-ls">
+  <view class="participate-in-ls">
+      <view class="swiper-title">竞猜中的小伙伴</view>
+      <view class="list-box">
+        <view class="in-list animationList" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item" animation="{{animationData[index]}}">{{animationData[index]}}
+          <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
+          <text class="in-text">{{item.message}}</text>
+        </view>         
+      </view>
+     
+  </view>
+<!-- <view class="participate-in-ls">
   <view class="swiper-title">竞猜中的小伙伴</view>
   <swiper indicator-dots="{{indicatorDots}}"
     autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical="true" current="0" circular="true" class="participate-swiper">
@@ -27,12 +31,13 @@
             <view class="in-list">
                 <image class="in-avatar" src="{{item.avatarUrl}}"></image>
                 <text class="in-text">{{item.message}}</text>
+
             </view>
           </block>
       </swiper-item>
     </block>
   </swiper>
-</view>
+</view> -->
   <view class="bottom-info">
   	<view class="integral-title">我的积分：{{integral}} <block class="help"></block></view>
   	<view class="invitation">

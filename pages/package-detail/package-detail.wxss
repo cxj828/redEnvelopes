@@ -54,9 +54,13 @@
 	min-height: 400rpx;
 	background-size: 100%;
 	margin-top: 40rpx;
-	/*overflow-y: scroll;*/
 	background-position: 0 0 ;
 	position: relative;
+}
+.list-box{
+	overflow-y: scroll;
+	width: 650rpx;
+	height: 300rpx;
 }
 .swiper-title{
 	width: 650rpx;

@@ -299,6 +299,7 @@ Page({
     if(that.data.jitterN>30){
         clearTimeout(time);
     }
+    wx.vibrateLong({});
     
   },
   goIndex : function(){

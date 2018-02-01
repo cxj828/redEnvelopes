@@ -22,7 +22,7 @@
     </form>
   </view>
   <view class="bottom-btn">
-    <navigator class="go-btn" url="/pages/my-red-envelopes/my-red-envelopes"><view class="my-icon"></view>我的红包</navigator>
+    <navigator class="go-btn" url="/pages/my-red-envelopes/my-red-envelopes"><view class="my-icon"></view>我的密码包</navigator>
     <navigator class="go-btn" url="/pages/withdrawals/withdrawals"><view class="money-icon"></view>余额提现</navigator>
   </view>
 </view>
