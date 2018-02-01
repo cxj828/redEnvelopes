@@ -17,6 +17,8 @@
 	height: 100rpx;
 	line-height: 100rpx;
 	border-bottom: 1px solid #D83030;
+	padding: 0 80rpx;
+	text-align: left;
 }
 .in-avatar{
 	display: inline-block;
@@ -26,11 +28,18 @@
 	vertical-align: middle;
 	margin-right: 20rpx;
 }
-.in-text{
-	font-size: 14px;
+.in-name{
+	font-size: 28rpx;
 	color: #FFCCCC;
 	display: inline-block;
 	vertical-align: middle;
+}
+.in-text{
+	font-size: 28rpx;
+	color: #FFCCCC;
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
 }
 .share-btn{
 	background-color: red;
