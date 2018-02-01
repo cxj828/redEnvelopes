@@ -15,7 +15,8 @@ Page({
     showerror:false,
     promptText : '提现成功！金额在1-3个工作日转到微信钱包',
     btnText : '确定',
-    showPrompt : false
+    showPrompt : false,
+    errorText : ""
   },
   //事件处理函数
   bindViewTap: function() {
@@ -53,10 +54,19 @@ Page({
       });
       return;
     }
+    if(parseFloat(that.data.inputval)<1){
+      that.setData({
+        "showerror":true,
+        "isdisable":true,
+        "errorText" : "单次提现金额1元起"
+      });
+      return;
+    }
     if(parseFloat(that.data.inputval) > parseFloat(that.data.allBalance)){
       that.setData({
         "showerror":true,
-        "isdisable":true
+        "isdisable":true,
+        "errorText" : "输入的金额超过账户余额"
       });
     }else{
         that.setData({

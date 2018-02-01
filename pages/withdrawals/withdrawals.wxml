@@ -5,7 +5,8 @@
         <view class="box-money">{{allBalance}} <text class="yuan">元</text></view>
         <view class="box-input-title">提现金额</view>
         <input placeholder="" class="box-input" type="digit" bindinput="oninput" bindconfirm="" bindfocus="" value="{{inputval}}"/>
-        <view class="box-submit-text">提现到微信钱包，<text class="text-blue" bindtap="withdrawalsAll">全部提现</text></view>
+        <view class="box-submit-text" wx:if="{{!showerror}}">提现到微信钱包，<text class="text-blue" bindtap="withdrawalsAll">全部提现</text></view>
+        <view class="box-submit-text box-submit-money-small" wx:if="{{showerror}}">{{errorText}}</view>
         <view bindtap="submit" class="box-submit {{isdisable ? 'disable':''}}"> 提现</view>
         <text class="small-text-submit">(一到三个工作日到账)</text>
     </view>

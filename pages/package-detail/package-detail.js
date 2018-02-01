@@ -154,7 +154,8 @@ Page({
           }
           that.setData({
               btnText:"确定",
-              password : ""
+              password : "",
+              reason :""
           })  
           return;
     }

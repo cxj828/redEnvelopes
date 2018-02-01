@@ -29,7 +29,10 @@ Page({
           packageDetail:res.data.respData
         })
         if(res.data.respData.createUserId != that.data.xcxUser.id){
-          shareBtnText = "我也发一个";
+          that.setData({
+            shareBtnText:"我也发一个"
+          })
+          
         }
         
       }

@@ -91,6 +91,10 @@ page{
 	text-align: center;
 	margin-top: 6rpx;
 }
+.box-submit-money-small{
+	font-size: 28rpx;
+	color: #E11111;
+}
  @import "../../wxss/common.wxss";
 
 
