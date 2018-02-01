@@ -59,7 +59,6 @@ Page({
         if(!+res.data.respData.status){
             util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，猜中有奖",unifiedOrderId:unifiedorderId},function(res){
               if(res.data.respData && res.data.code === "SUCCESS"){
-                
                 wx.navigateTo({
                   url: '/pages/password-package/password-package?id='+res.data.respData.id
                 });  
@@ -114,7 +113,9 @@ Page({
       }
       if(e.detail.value && +e.detail.value<1){
         that.setData({
-          moneyerror : {show:true,text:"金额不可小于1.00元"}
+          moneyerror : {show:true,text:"金额不可小于1.00元"},
+          creatBtnText : "生成密码包",
+          balanceText : ""
         }) 
         return;
       }else{
