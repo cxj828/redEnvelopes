@@ -13,13 +13,14 @@
   </view>
   <view class="participate-in-ls">
       <view class="swiper-title">竞猜中的小伙伴</view>
-      <view class="list-box">
+      <view class="list-box" wx:if="{{recordList.length}}">
         <view class="in-list animationList" wx:for="{{recordList}}" wx:for-index="idx" wx:for-item="item" >
           <image bindtap="" class="in-avatar" src="{{item.avatarUrl}}" ></image>
           <text class="in-text">{{item.message}}</text>
         </view>         
       </view>
-     
+      <view class="no-data-img" wx:if="{{!recordList.length}}"></view>
+      <view class="no-data-text" wx:if="{{!recordList.length}}">暂无竞猜的小伙伴</view>
   </view>
 <!-- <view class="participate-in-ls">
   <view class="swiper-title">竞猜中的小伙伴</view>
