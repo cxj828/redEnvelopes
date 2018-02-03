@@ -50,7 +50,7 @@ Page({
   onShareAppMessage: function () {
     var that = this;
     return {
-      title: "比一比谁的手速最快",
+      title: that.data.detail.remark,
       path: '/pages/password-package/password-package?id='+that.data.redPacketId,
       imageUrl:"/imgs/share.jpeg"
     }
