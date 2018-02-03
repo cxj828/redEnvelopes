@@ -287,7 +287,8 @@ Page({
       if(res.data.respData && res.data.code === "SUCCESS"){
         
         that.setData({
-          chance:res.data.respData.usableGuessTimes
+          chance:res.data.respData.usableGuessTimes,
+          integral : that.data.integral-1
         })     
         that.closePrompt();
         wx.showToast({
