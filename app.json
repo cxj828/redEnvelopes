@@ -2,7 +2,6 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/detail/detail",
     "pages/withdrawals/withdrawals",
     "pages/password-package/password-package",
     "pages/my-red-envelopes/my-red-envelopes",

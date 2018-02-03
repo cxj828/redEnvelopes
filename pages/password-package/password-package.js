@@ -52,7 +52,7 @@ Page({
     return {
       title: "比一比谁的手速最快",
       path: '/pages/password-package/password-package?id='+that.data.redPacketId,
-      imageUrl:"/imgs/kai.png"
+      imageUrl:"/imgs/share.jpeg"
     }
   }
 })
