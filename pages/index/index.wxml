@@ -13,7 +13,7 @@
       </view>
       <view class="envelopes-input"> 
         <text class="desc-position">留言</text>
-        <input bindinput="bindEnvelopesDescInput" placeholder="恭喜发财，猜中有奖" maxlength="20" value="{{envelopesDescribe}}"/>
+        <input bindinput="bindEnvelopesDescInput" placeholder="恭喜发财，大吉大利" maxlength="20" value="{{envelopesDescribe}}"/>
       </view>
       
       <button formType="submit" class="envelopes-btn "> <text class="creat-btn {{balanceText? 'changetop' : ''}} {{moneyerror.show? 'disable' : ''}}">{{creatBtnText}}</text> <text class="money-error2"  wx:if="{{balanceText}}">{{balanceText}}</text></button>

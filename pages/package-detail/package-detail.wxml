@@ -1,11 +1,12 @@
 <import src="../../template/integral-prompt.wxml"/>
 <import src="../../template/red-envelopes-prompt.wxml"/>
+<import src="../../template/rule-prompt.wxml"/>
 <view class="container">
   <view class="detail-money">{{smallNum}} - {{bigNum}}</view>
   <view class="detail-prompt">密码范围提示</view>
   <view class="input-box">
   	<text class="reason">{{reason}}</text>
-    <!-- <view class="play-rule">玩法介绍</view> -->
+    <view class="play-rule" wx:if="{{!reason}}" bindtap="showRule">玩法介绍</view>
     <input class="detail-input {{btnText=='再猜一次'? 'input-error' : ''}}" type="number" name="" placeholder="请输入密码" value="{{password}}" bindinput="bindKeyInput" style="left: {{inputT}}" disabled="{{btnText=='再猜一次'}}"/>
     <text class="detail-surplus">还剩{{chance}}次机会</text>
   </view>
@@ -41,10 +42,10 @@
   </swiper>
 </view> -->
   <view class="bottom-info">
-  	<view class="integral-title">我的积分：{{integral}} <block class="help"></block></view>
+  	<view class="integral-title">我的积分：{{integral}} <text class="help" bindtap="showInterval"></text></view>
   	<view class="invitation">
   		<text class="invitation-text">邀请你的好友</text>
-  		<text class="text-use">一起竞猜</text>
+  		<text class="text-use">一起来破解</text>
   		 <button class="share-btn" bindtap="" open-type="share">去邀请</button>
   	</view>
   	<view class="exchange">
@@ -55,6 +56,7 @@
   </view>
   <template is="integral-prompt" data="{{promptText,chanceBtnText,showIntegralPrompt,doExchange,integral}}" /> 
   <template is="red-envelopes-prompt" data="{{redEnvelopesPrompt,userInfo,btnbind}}" /> 
+  <template is="rule-prompt" data="{{rulePrompt}}" /> 
 </view>
 
 

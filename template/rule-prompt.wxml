@@ -1,0 +1,8 @@
+<template name="rule-prompt">
+  <view class="bg" wx:if="{{rulePrompt.show}}"></view>
+  <view class="{{rulePrompt.title!='积分规则'? 'prompt-rule-modal':'prompt-integral-rule-modal'}}" wx:if="{{rulePrompt.show}}">
+  	<view class="rule-title">{{rulePrompt.title}}</view>
+    <view class="rule-text">{{rulePrompt.content}}</view>
+    <view class="rule-btn" bindtap="closePrompt">{{rulePrompt.btn}}</view>
+  </view>
+</template>

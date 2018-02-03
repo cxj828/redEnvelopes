@@ -5,7 +5,7 @@ const app = getApp()
 
 Page({
   data: {
-    sendPrompt: '系统随机生成2位数密码，好友猜中密码才能获得赏金',
+    sendPrompt: '系统随机生成2位数密码，好友破解密码即可获得赏金',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -74,7 +74,7 @@ Page({
       if(res.data.respData && res.data.code === "SUCCESS"){
         var unifiedorderId = res.data.respData.unifiedorderId;
         if(!+res.data.respData.status){
-            util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，猜中有奖",unifiedOrderId:unifiedorderId},function(res){
+            util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，大吉大利",unifiedOrderId:unifiedorderId},function(res){
               if(res.data.respData && res.data.code === "SUCCESS"){
                 wx.navigateTo({
                   url: '/pages/password-package/password-package?id='+res.data.respData.id
@@ -94,7 +94,7 @@ Page({
              'signType': payData.signType,
              'paySign': payData.paySign,
              'success':function(res){
-                util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，猜中有奖",unifiedOrderId:unifiedorderId},function(res){
+                util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/create.post",{userId:xcxUser.id,money:data.money,remark:that.data.envelopesDescribe||"恭喜发财，大吉大利",unifiedOrderId:unifiedorderId},function(res){
                   if(res.data.respData && res.data.code === "SUCCESS"){
                     wx.navigateTo({
                       url: '/pages/password-package/password-package?id='+res.data.respData.id

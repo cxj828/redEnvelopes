@@ -13,7 +13,7 @@ Page({
     chance : 3,
     chanceBtnText: "兑换一次",
     showIntegralPrompt : false,
-    promptText :"使用1积分兑换1次竞猜机会，兑换后不可退回并仅对本密码包有效，是否确认兑换？",
+    promptText :"1积分可以兑换1个破解机会，兑换后不可退回并仅对本密码包有效，是否确认兑换?",
     redEnvelopesPrompt : {show:false,success:true},
     userInfo:{},
     recordList:[],
@@ -36,7 +36,13 @@ Page({
     duration: 1000,
     recordResult:[],
     useCheckPwd : "",
-    remark:""
+    remark:"",
+    rulePrompt:{
+      show:false,
+      content:"由系统为每个红包设置一个1-100之间的任意数字。所有玩家默认有5次机会竞猜，玩家每竞猜一个数字，系统会给出新的数字区间； 例子：比如红包的密码是23 ，玩家第一次竞猜数字68，系统会更新密码范围提示为0-68之间，玩家第二次可以竞猜0-68之间的数字，直到有玩家猜中数字23，猜中的玩家即可获得红包内的全部金额",
+      title:"终极密码包玩法介绍",
+      btn:"我知道了"
+    }
   },
   //事件处理函数
   bindViewTap: function() {
@@ -252,7 +258,8 @@ Page({
   },
   closePrompt : function(){
       this.setData({
-        showIntegralPrompt: false
+        showIntegralPrompt: false,
+        rulePrompt : {show:false}
       })
   },
   btnbind : function(){
@@ -372,6 +379,27 @@ Page({
       path: '/pages/password-package/password-package?id='+that.data.redPacketId,
       imageUrl:"/imgs/kai.png"
     }
+  },
+  showRule : function(){
+    var that = this;
+    that.setData({
+      rulePrompt:{
+        show:true,
+        content:"由系统为每个红包设置一个1-100之间的任意数字。所有玩家默认有5次机会竞猜，玩家每竞猜一个数字，系统会给出新的数字区间； 例子：比如红包的密码是23 ，玩家第一次竞猜数字68，系统会更新密码范围提示为0-68之间，玩家第二次可以竞猜0-68之间的数字，直到有玩家猜中数字23，猜中的玩家即可获得红包内的全部金额",
+        title:"终极密码包玩法介绍",
+        btn:"我知道了"
+      }
+    })
+  },
+  showInterval : function(){
+    var that = this;
+    that.setData({
+      rulePrompt:{
+        show:true,
+        content:"您发出的密码包被破解时（包括自己破解），您可获得1个积分",
+        title:"积分规则",
+        btn:"我知道了"
+      }
+    })
   }
-
 })
