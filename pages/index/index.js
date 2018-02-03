@@ -13,7 +13,8 @@ Page({
     moneyerror:{text:"金额不可小于1.00元",show:false},
     envelopesDescribe : "",
     creatBtnText : "生成密码包",
-    balanceText : ""
+    balanceText : "",
+    statusLock : false
   },
   //事件处理函数
   bindViewTap: function() {
@@ -37,7 +38,8 @@ Page({
       moneyerror : {show:false,text:"金额不可小于1.00元"},
       envelopesDescribe : "",
       creatBtnText : "生成密码包",
-      balanceText : ""
+      balanceText : "",
+      statusLock : false
     }) 
   },
   onLoad: function () {},
@@ -56,6 +58,13 @@ Page({
       }) 
       return;
     }
+    if(!that.data.statusLock){
+      that.setData({
+        statusLock : true
+      }) 
+    }else{
+      return;
+    }
     var data = {
       "userId":xcxUser.id,
       "money" : that.data.money*100
@@ -70,6 +79,10 @@ Page({
                 wx.navigateTo({
                   url: '/pages/password-package/password-package?id='+res.data.respData.id
                 });  
+              }else{
+                that.setData({
+                  statusLock: false
+                })           
               }
             });
         }else{
@@ -90,10 +103,16 @@ Page({
                 });
              },
              'fail':function(res){
-
+                that.setData({
+                  statusLock: false
+                })  
              }
           })
         }
+      }else{
+          that.setData({
+            statusLock: false
+          })  
       }
     });
 
