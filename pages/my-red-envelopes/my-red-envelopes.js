@@ -100,7 +100,6 @@ Page({
           }
           that.setData({
             list : that.data.list.concat(res.data.respData),
-            hasMore : res.data.hasMore,
             allMoney : res.data.extData,
             allSize : res.data.totalSize
           });
@@ -114,6 +113,7 @@ Page({
         callback(type+1);
       }
         that.setData({
+            hasMore : res.data.hasMore,
             loading : false
         });
     });

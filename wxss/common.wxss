@@ -6,6 +6,7 @@
 	z-index: 1000;
 	top: 400rpx;
 	padding: 72rpx 44rpx ;
+	left: 63rpx;
 }
 .bg{
     background: rgba(0,0,0,.6);
