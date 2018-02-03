@@ -63,6 +63,10 @@ Page({
       if(res.data.respData && res.data.code === "SUCCESS"){
         if(+res.data.respData.status===1){
           that.setData({
+             userInfo : {
+                avatarUrl : res.data.respData.avatarUrl,
+                nickName : res.data.respData.createUserNickName
+             },
              chance :res.data.respData.usableGuessTimes,
              redPacketId : res.data.respData.id
           })          
@@ -71,15 +75,15 @@ Page({
              redEnvelopesPrompt:{show:true,success:false},
              userInfo : {
                 avatarUrl : res.data.respData.avatarUrl,
-                nickName : res.data.respData.nickName
+                nickName : res.data.respData.createUserNickName
              }
           })   
         }else if(+res.data.respData.status===3){
           that.setData({
-             redEnvelopesPrompt:{show:true,success:false},
+             redEnvelopesPrompt:{show:true,success:false,overdue :true},
              userInfo : {
                 avatarUrl : res.data.respData.avatarUrl,
-                nickName : res.data.respData.nickName
+                nickName : res.data.respData.createUserNickName
              }
           })   
         }

@@ -69,6 +69,7 @@
 	z-index: 1000;
 	top: 200rpx;
 	text-align: center;
+	left: 50rpx;
 }
 .envelopes-prompt-userinfo-avatar{
 	display: block;

@@ -5,7 +5,7 @@
   		 <image bindtap="bindViewTap" class="envelopes-prompt-userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover" wx:if="{{!redEnvelopesPrompt.success}}"></image>
   		 <text class="envelopes-prompt-userinfo-name" wx:if="{{!redEnvelopesPrompt.success}}">{{userInfo.nickName}}</text>
   		 <text class="envelopes-prompt-bingo" wx:if="{{redEnvelopesPrompt.success}}">Bingo！</text>
-  		 <text class="envelopes-prompt-text"  wx:if="{{!redEnvelopesPrompt.success}}">手慢了，密码已经被别人破解了</text>
+  		 <text class="envelopes-prompt-text"  wx:if="{{!redEnvelopesPrompt.success}}">{{redEnvelopesPrompt.overdue ? '手慢了，红包已过期' : '手慢了，密码已经被别人破解了'}}</text>
   		 <text class="envelopes-prompt-text" wx:if="{{redEnvelopesPrompt.success}}">恭喜您猜中密码获得红包全部金额</text>
   	</view>
     <view wx:if="{{redEnvelopesPrompt.success}}">
