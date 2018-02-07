@@ -49,10 +49,17 @@ Page({
   },
   onShareAppMessage: function () {
     var that = this;
+    var data = {
+      currUserId : wx.getStorageSync('xcxUser').id,
+      redPacketId : that.data.redPacketId
+    };
     return {
       title: that.data.detail.remark,
       path: '/pages/password-package/password-package?id='+that.data.redPacketId,
-      imageUrl:"/imgs/share.jpeg"
+      imageUrl:"/imgs/share.jpeg",
+      success:function(){
+        util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/user/user-share-redpacket.post",data,function(res){});
+      }
     }
   }
 })
