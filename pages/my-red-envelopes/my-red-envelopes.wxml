@@ -25,7 +25,7 @@
             <view class="personnel-name" wx:if="{{selecting==2}}">密码包</view>
             <view class="personnel-date">{{item.gmtCreateTime}}</view>
          </view>   
-         <view class="personnel-money" wx:if="{{selecting==1}}" ><text class="caizhong">猜中</text><text class="money-margin">{{item.money/100}}元</text></view>     
+         <view class="personnel-money" wx:if="{{selecting==1}}" ><text class="caizhong">破解</text><text class="money-margin">{{item.money/100}}元</text></view>     
 
 
          <view class="personnel-money w-106"  wx:if="{{selecting==2}}">

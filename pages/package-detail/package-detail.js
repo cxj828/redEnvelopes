@@ -50,13 +50,10 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function (options) {
+  onShow: function(){
     var that = this;
-    that.setData({
-      redPacketId:options.id
-    })
     var data = {
-      redPacketId : options.id,
+      redPacketId : that.data.redPacketId,
       currUserId : wx.getStorageSync('xcxUser').id
     };
     util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/detail.post",data,function(res){
@@ -99,7 +96,7 @@ Page({
     var recordData = {
       includeSelf:true,
       currUserId:wx.getStorageSync('xcxUser').id,
-      redPacketId:options.id
+      redPacketId:that.data.redPacketId
     }
     //查询参加抢红包的人的记录信息（一人一条）
     var requestURL = app.globalData.serviceServer + "/weixin/api/redpacket/redpacket-guess-record.post";
@@ -118,6 +115,12 @@ Page({
         })
       }
     });
+  },
+  onLoad: function (options) {
+    var that = this;
+    that.setData({
+      redPacketId:options.id
+    })
   },
   buildEnvelopes: function(e){
     var that = this;
@@ -329,34 +332,7 @@ Page({
       url:  "/pages/index/index"
     });
   },
-  onShow: function(){
-    // var that = this;
-    // var animation = wx.createAnimation({
-    //   duration: 1000,
-    //   timingFunction: 'ease',
-    // })
-    // var num = -40;
-    // var n = 0;
-    // setInterval(function() {
-    //   n++
-    //   animation.translate(0,num).step()
-    //   that.setData({
-    //     animationData:animation.export()
-    //   })
-    //   if(n%3==0){
-    //     that.setData({
-    //       recordList : that.data.recordList.concat(that.data.recordList)
-    //     })      
-    //   }
-    //   num = num-40;
-    // }.bind(this), 1000)
 
-//     wx.createSelectorQuery().selectAll('.animationList').boundingClientRect(function(rects){
-//       rects.forEach(function(rect){
-// console.log(rect)
-//       })
-//     }).exec()
-  },
   changeIndicatorDots: function (e) {
     this.setData({
       indicatorDots: !this.data.indicatorDots
@@ -379,10 +355,19 @@ Page({
   },
   onShareAppMessage: function () {
     var that = this;
+    var data = {
+      currUserId : wx.getStorageSync('xcxUser').id,
+      redPacketId : that.data.redPacketId
+    };
     return {
       title: that.data.remark,
       path: '/pages/password-package/password-package?id='+that.data.redPacketId,
-      imageUrl:"/imgs/share.jpeg"
+      imageUrl:"/imgs/share.jpeg",
+      success:function(){
+        util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/user/user-share-redpacket.post",data,function(res){
+          that.onShow();
+        });
+      }
     }
   },
   showRule : function(){
