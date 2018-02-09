@@ -14,7 +14,8 @@ Page({
     envelopesDescribe : "",
     creatBtnText : "生成密码包",
     balanceText : "",
-    statusLock : false
+    statusLock : false,
+    inputConfig :{}
   },
   //事件处理函数
   bindViewTap: function() {
@@ -33,6 +34,15 @@ Page({
         hasUserInfo: true
       });
     })  
+    util.commonUTIL.netWorkRequestJsonFun(app.globalData.serviceServer + "/weixin/api/redpacket/show-status.post",{},function(res){
+        if(res.data.respData && res.data.code === "SUCCESS"){
+           
+            that.setData({
+              inputConfig:res.data.respData
+            });
+        }
+    });
+    
     that.setData({
       money: "",
       moneyerror : {show:false,text:"金额不可小于1.00元"},

@@ -100,7 +100,8 @@ Page({
       if(res.data.respData && res.data.code === "SUCCESS"){
           that.setData({
             showPrompt:true,
-            promptText : res.data.respData.message
+            promptText : res.data.respData.message,
+            allBalance : res.data.respData.surplusMoney/100
           });          
         
       }
